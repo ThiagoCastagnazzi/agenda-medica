@@ -1,50 +1,46 @@
-"use client";
-
-import { useModal } from "@/context/ModalContext";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { FaUserCircle, FaChevronDown } from "react-icons/fa";
 
 import { FiLogOut, FiUser } from "react-icons/fi";
 
 const Account = () => {
-  const route = useRouter();
+  // const route = useRouter();
 
-  const { openModal, setOptionId } = useModal();
+  // const { openModal, setOptionId } = useModal();
 
-  const dropdownRef = useRef<any>(null);
+  const dropdownRef = useRef(null);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const handleOpenModal = (optionId: string) => {
-    setOptionId(optionId);
-    openModal();
-  };
+  // const handleOpenModal = (optionId: string) => {
+  //   setOptionId(optionId);
+  //   openModal();
+  // };
 
   const handleDropdownClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  const handleClickOutside = (event: any) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsDropdownOpen(false);
-    }
-  };
+  // const handleClickOutside = (event: any) => {
+  //   if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //     setIsDropdownOpen(false);
+  //   }
+  // };
 
-  const handleSignOut = async () => {
-    await signOut({ redirect: false });
+  // const handleSignOut = async () => {
+  //   await signOut({ redirect: false });
 
-    route.push("/");
-  };
+  //   route.push("/");
+  // };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
     <div
@@ -115,7 +111,7 @@ const Account = () => {
                   hover:text-[#1570EF]
                   hover:bg-[#EFF8FE]
                   "
-                onClick={() => handleOpenModal("3.1")}
+                // onClick={() => handleOpenModal("3.1")}
               >
                 <FiUser size={24} />
                 <span>Meus Dados</span>
@@ -141,7 +137,7 @@ const Account = () => {
                   hover:text-red-600
                   hover:bg-[#EFF8FE]
                   "
-                onClick={handleSignOut}
+                // onClick={handleSignOut}
               >
                 <FiLogOut size={24} />
                 <span>Sair</span>

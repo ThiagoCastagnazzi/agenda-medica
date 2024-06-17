@@ -1,12 +1,8 @@
-"use client";
-
-import Image from "next/image";
 import { FiCalendar, FiUser } from "react-icons/fi";
-import { usePathname } from "next/navigation";
 import Options from "./Options";
 
 const Header = () => {
-  const route = usePathname();
+  const route = window.location.pathname;
 
   return (
     <header
@@ -32,15 +28,6 @@ const Header = () => {
       "
       >
         <a href="/agenda" className="flex items-center gap-[8px]">
-          <Image
-            src="/Logo.svg"
-            width={71}
-            height={40}
-            alt="Logo"
-            loading="eager"
-            color="#1B509A"
-            className="w-[50px] 2xl:w-[71px] h-[40px] 2xl:h-[40px]"
-          />
           <span
             className="
           font-medium
@@ -51,7 +38,7 @@ const Header = () => {
           pr-[16px]
           "
           >
-            Clínica de Olhos
+            Agenda Médica
           </span>
         </a>
         <div

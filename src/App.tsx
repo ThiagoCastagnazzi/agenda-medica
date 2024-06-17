@@ -1,8 +1,23 @@
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+import { AuthProvider } from "./context/authContext";
+import { Toaster } from "react-hot-toast";
+
+import "./index.css";
+
 function App() {
   return (
-    <div>
-      <h1 className="text-white text-2xl">Thiago</h1>
-    </div>
+    <AuthProvider>
+      <RouterProvider router={router} />
+      <Toaster
+        position="bottom-left"
+        toastOptions={{
+          style: {
+            zIndex: 9999,
+          },
+        }}
+      />
+    </AuthProvider>
   );
 }
 

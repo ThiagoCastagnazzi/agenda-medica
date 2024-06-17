@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, Input, Wrapper } from "./styles";
 import { auth } from "../../firebase/firebase";
 import { useAuth } from "../../context/authContext";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 export default function LoginC() {
   const { setCurrentUser } = useAuth();

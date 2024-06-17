@@ -1,6 +1,4 @@
-'use client';
-
-import Layout from '@/components/Layout';
+import Layout from "../../Layout";
 
 const AgendaLoader = () => {
   return (

@@ -1,14 +1,106 @@
-'use client';
+"use client";
 
-import { useAppointments } from '@/hooks/useAppointments';
-import Calendar from '../Calendar';
+import Calendar from "../Calendar";
 
-import { FiWatch } from 'react-icons/fi';
+import { FiWatch } from "react-icons/fi";
 
 const MAX_NAME_LENGTH = 20;
 
 const Sidebar = () => {
-  const { data: appointments } = useAppointments({});
+  // const { data: appointments } = useAppointments({});
+
+  const appointments = [
+    {
+      id: "1",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "10:00",
+        patient: {
+          full_name: "Fulano de Tal",
+        },
+      },
+    },
+    {
+      id: "2",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "11:00",
+        patient: {
+          full_name: "Ciclano de Tal",
+        },
+      },
+    },
+    {
+      id: "3",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "12:00",
+        patient: {
+          full_name: "Beltrano de Tal",
+        },
+      },
+    },
+    {
+      id: "4",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "13:00",
+        patient: {
+          full_name: "Fulano de Tal",
+        },
+      },
+    },
+    {
+      id: "5",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "14:00",
+        patient: {
+          full_name: "Ciclano de Tal",
+        },
+      },
+    },
+    {
+      id: "6",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "15:00",
+        patient: {
+          full_name: "Beltrano de Tal",
+        },
+      },
+    },
+    {
+      id: "7",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "16:00",
+        patient: {
+          full_name: "Fulano de Tal",
+        },
+      },
+    },
+    {
+      id: "8",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "17:00",
+        patient: {
+          full_name: "Ciclano de Tal",
+        },
+      },
+    },
+    {
+      id: "9",
+      attributes: {
+        event_date: "2022-10-10",
+        event_time: "18:00",
+        patient: {
+          full_name: "Beltrano de Tal",
+        },
+      },
+    },
+  ];
 
   const truncateFullName = (fullName: string) => {
     if (fullName.length > MAX_NAME_LENGTH) {
@@ -20,11 +112,11 @@ const Sidebar = () => {
   const today = new Date();
 
   const appointmentsToday = appointments?.filter(
-    appointment =>
+    (appointment) =>
       appointment.attributes.event_date ===
       `${today.getFullYear()}-${(today.getMonth() + 1)
         .toString()
-        .padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`,
+        .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`
   );
 
   const orderedAppointmentsToday = appointmentsToday?.sort((a, b) => {
@@ -38,7 +130,7 @@ const Sidebar = () => {
   });
 
   const orderedAppointmentsTodayByTime = orderedAppointmentsToday?.filter(
-    appointment => {
+    (appointment) => {
       const timeNow = new Date();
 
       if (
@@ -57,7 +149,7 @@ const Sidebar = () => {
       }
 
       return null;
-    },
+    }
   );
 
   return (
@@ -107,12 +199,8 @@ const Sidebar = () => {
         >
           {appointmentsToday &&
             orderedAppointmentsTodayByTime &&
-            orderedAppointmentsTodayByTime.map(appointment => (
-              <a
-                key={appointment.id}
-                className="flex items-center gap-[10px]"
-                href={`/prontuario/paciente/${appointment.attributes.patient.id}`}
-              >
+            orderedAppointmentsTodayByTime.map((appointment) => (
+              <a key={appointment.id} className="flex items-center gap-[10px]">
                 <span
                   className="
                     text-[#1B509A]

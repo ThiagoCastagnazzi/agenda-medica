@@ -5,7 +5,7 @@ import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import ptBR from "date-fns/locale/pt-BR";
 import "react-datepicker/dist/react-datepicker.css";
 
-import "../../app/calendar.css";
+import "./calendar.css";
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());

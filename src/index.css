@@ -1,3 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #c0c0c0;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.day_header {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.all_day {
+  display: none;
+}
+
+.none {
+  display: none;
+}
+
+.fc-header-toolbar {
+  padding: 20px 32px !important;
+}
+
+.fc-toolbar-title {
+  text-transform: capitalize;
+  color: #344054;
+  font-size: 26px;
+}
+
+.fc-today-button {
+  width: 102px !important;
+  height: 42px !important;
+  border-radius: 6px !important;
+  margin-left: 20px !important;
+  background-color: #a1a1a1 !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.fc-prev-button {
+  width: 50px !important;
+  height: 42px !important;
+}
+
+.fc-next-button {
+  width: 50px !important;
+  height: 42px !important;
+  border-top-right-radius: 6px !important;
+  border-end-end-radius: 6px !important;
+}
+
+.fc-button-active {
+  background-color: #a1a1a1 !important;
+  color: #f3f4f6 !important;
+  border: none !important;
+}
+
+.fc .fc-button:disabled {
+  opacity: 1 !important;
+}
+
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button,
+.fc-timeGridDay-button,
+.fc-listWeek-button {
+  padding: 0 !important;
+  width: 65px !important;
+  height: 44px !important;
+}
+
+.fc-timegrid-slot {
+  height: 190px !important;
+}
+
+.fc-more-link {
+  height: 54px !important;
+  margin-top: 1px !important;
+}
+
+.fc-event {
+  width: 100% !important;
+  padding-left: 8px;
+  height: 54px;
+  background-color: #e0f8eb !important;
+  outline: none !important;
+  margin-top: 1px !important;
+  border: none !important;
+  border-left: 2px solid #59f1a9 !important;
+  word-wrap: break-word !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.fc-event-time {
+  font-weight: 300 !important;
+  font-size: 16px !important;
+  color: #166342 !important;
+  line-height: 18px !important;
+}
+
+.fc-event-title {
+  font-weight: 500 !important;
+  font-size: 18px !important;
+  color: #166342 !important;
+  line-height: 20px !important;
+}
+
+.fc-timegrid-slot-label {
+  vertical-align: top !important;
+  color: #c4c8d4 !important;
+}
+
+.fc-day-mon {
+  width: 180px !important;
+  height: 82px !important;
+}
+
+.day_header a {
+  text-transform: capitalize;
+  color: #344054 !important;
+  margin-top: 20px !important;
+}
+
+.fc .fc-button:focus {
+  box-shadow: none;
+}
+
+.fc-day-today {
+  background-color: #eff7ff !important;
+}
+
+.fc-day-sat,
+.fc-day-sun {
+  background-color: #e2e5eb !important;
+}
+
+.day_header {
+  background-color: transparent !important;
+}
+
+.fc-daygrid-day-events {
+  margin-top: 0px !important;
+}
+
+.fc-daygrid-body {
+  margin-right: 10px !important;
+}
+
+.fc-daygrid-body {
+  width: 100% !important;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+  box-shadow: none !important;
+}
+
+.fc-more-popover {
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+.fc-popover-body {
+  min-width: 180px !important;
+  max-height: 100px !important;
+  overflow-y: auto !important;
+  padding: 10px 0 !important;
+}
+
+.p-paginator-pages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.p-highlight {
+  color: #1b509a !important;
+}
+
+.p-paginator-prev,
+.p-paginator-next {
+  color: #a8a8b3;
+}
+
+.p-paginator-icon {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c0c0c0;
+}
+
+.fc-scroller::-webkit-scrollbar {
+  display: none !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
