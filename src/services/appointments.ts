@@ -1,17 +1,29 @@
-import { Appointment } from '@/types/Appointments';
-import api from './api';
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { firestore } from "../firebase/firebase";
+import { Appointment } from "../types/Appointments";
 
-export const createAppointmentApi = async (appointment: Appointment) => {
-  const response = await api.post('/appointments', appointment);
-
-  return response.data;
+export const createAppointmentFirebase = async (
+  appointmentData: Appointment
+) => {
+  try {
+    const docRef = await addDoc(
+      collection(firestore, "appointments"),
+      appointmentData
+    );
+    return docRef.id;
+  } catch (error) {
+    throw new Error("Error adding document: " + error);
+  }
 };
 
-export const updateAppointmentApi = async (
+export const updateAppointmentFirebase = async (
   id: string,
-  appointment: Appointment,
+  appointmentData: any
 ) => {
-  const response = await api.put(`/appointments/${id}`, appointment);
-
-  return response.data;
+  try {
+    await setDoc(doc(firestore, "appointments", id), appointmentData);
+    return true;
+  } catch (error) {
+    throw new Error("Error updating document: " + error);
+  }
 };

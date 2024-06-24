@@ -1,9 +1,9 @@
 export type Appointment = {
+  id: string;
   event_date: string;
   event_time: string;
-  notes?: string;
-  patient_id: number;
-  doctor_id: number;
+  patient_name: string;
+  patient_id: string;
 };
 
 export type AppointmentResponse = {

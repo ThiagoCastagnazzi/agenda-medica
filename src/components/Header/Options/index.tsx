@@ -2,36 +2,37 @@ import { FiCalendar, FiUserPlus } from "react-icons/fi";
 import { FaPlusCircle } from "react-icons/fa";
 
 import Account from "../Account";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useModal } from "../../../context/ModalContext";
 
 const Options = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const { openModal, setOptionId } = useModal();
+  const { openModal, setOptionId } = useModal();
 
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const handleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // const handleOptionClick = (optionId: string) => {
-  //   setIsMenuOpen(false);
-  //   setOptionId(optionId);
-  //   openModal();
-  // };
+  const handleOptionClick = (optionId: string) => {
+    setIsMenuOpen(false);
+    setOptionId(optionId);
+    openModal();
+  };
 
-  // const handleClickOutside = (event: any) => {
-  //   if (menuRef.current && !menuRef.current.contains(event.target)) {
-  //     setIsMenuOpen(false);
-  //   }
-  // };
+  const handleClickOutside = (event: any) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsMenuOpen(false);
+    }
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className="flex items-center gap-[16px] relative">
@@ -77,7 +78,7 @@ const Options = () => {
             className={`
                 flex items-center gap-[12px] hover:text-[#1849A9] hover:bg-blue-light cursor-pointer p-[8px] rounded-[4px]
                 `}
-            // onClick={() => handleOptionClick("1")}
+            onClick={() => handleOptionClick("1")}
           >
             <FiCalendar size={24} color="#344054" />
             <span>Novo Agendamento</span>
@@ -86,7 +87,7 @@ const Options = () => {
             className={`
                 flex items-center gap-[12px] hover:text-[#1849A9] hover:bg-blue-light cursor-pointer p-[8px] rounded-[4px]
                 `}
-            // onClick={() => handleOptionClick("2")}
+            onClick={() => handleOptionClick("2")}
           >
             <FiUserPlus size={24} color="#344054" />
             <span>Novo Paciente</span>
@@ -99,7 +100,7 @@ const Options = () => {
             className={`
                 flex items-center gap-[12px] hover:text-[#1849A9] hover:bg-blue-light cursor-pointer p-[8px] rounded-[4px]
                 `}
-            // onClick={() => handleOptionClick("3")}
+            onClick={() => handleOptionClick("3")}
           >
             <FiUserPlus size={24} color="#344054" />
             <span>Novo Usuário</span>

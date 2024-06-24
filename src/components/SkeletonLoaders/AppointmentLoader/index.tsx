@@ -1,5 +1,3 @@
-'use client';
-
 const AppointmentLoader = () => {
   return (
     <div className="flex flex-col w-full h-full mb-[20px]">

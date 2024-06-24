@@ -17,6 +17,8 @@ const Header = () => {
     justify-between
     fixed
     top-0
+    left-0
+    right-0
     w-full
     z-20
     "
@@ -27,7 +29,7 @@ const Header = () => {
       items-center
       "
       >
-        <a href="/agenda" className="flex items-center gap-[8px]">
+        <a href="/" className="flex items-center gap-[8px]">
           <span
             className="
           font-medium
@@ -59,9 +61,9 @@ const Header = () => {
           >
             <li>
               <a
-                href="/agenda"
+                href="/"
                 className={`flex items-center gap-[8px] rounded-[4px] px-[12px] 2xl:px-[16px] py-[4px] 2xl:py-[8px] ${
-                  route.match("/agenda")
+                  route === "/"
                     ? "text-[#1849A9] bg-blue-light drop-shadow-md"
                     : " text-label"
                 }`}

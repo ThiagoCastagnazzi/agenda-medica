@@ -1,33 +1,40 @@
-import { Doctor } from '@/types/Users';
-import api from './api';
-import { SecretariePOST, SecretariePUT } from '@/types/Secretaries';
+import { createUserWithEmailAndPassword, updatePassword } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
-export const createDoctorApi = async (user: Doctor) => {
-  const response = await api.post('/doctors', user);
+interface User {
+  email: string;
+  password: string;
+}
 
-  return response.data;
+export const createUserFirebase = async (user: User) => {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      user.email,
+      user.password
+    );
+    return userCredential;
+  } catch (error) {
+    console.error("Erro ao criar usuário:", error);
+    throw error;
+  }
 };
 
-export const updateDoctorApi = async (user: Doctor, id: any) => {
-  const response = await api.put(`/doctors/${id}`, user);
+export const updateUserFirebase = async (userUpdates: User) => {
+  const currentUser = auth.currentUser;
 
-  return response.data;
-};
+  if (!currentUser) {
+    throw new Error("No user is currently signed in.");
+  }
 
-export const getDoctorByIdApi = async (id: number | undefined) => {
-  const response = await api.get(`/doctors/${id}`);
+  try {
+    if (userUpdates.password) {
+      await updatePassword(currentUser, userUpdates.password);
+    }
 
-  return response.data;
-};
-
-export const createReceptionistApi = async (user: SecretariePOST) => {
-  const response = await api.post('/secretaries', user);
-
-  return response.data;
-};
-
-export const updateSecretarieApi = async (user: SecretariePUT, id: any) => {
-  const response = await api.put(`/secretaries/${id}`, user);
-
-  return response.data;
+    return currentUser;
+  } catch (error) {
+    console.error("Erro ao atualizar usuário:", error);
+    throw error;
+  }
 };

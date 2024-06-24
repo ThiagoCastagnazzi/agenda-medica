@@ -4,19 +4,24 @@ import { AuthProvider } from "./context/authContext";
 import { Toaster } from "react-hot-toast";
 
 import "./index.css";
+import { TanstackProvider } from "./Providers/TanstackProvider";
+import { ModalProvider } from "./context/ModalContext";
 
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
-      <Toaster
-        position="bottom-left"
-        toastOptions={{
-          style: {
-            zIndex: 9999,
-          },
-        }}
-      />
+      <TanstackProvider>
+        <ModalProvider>
+          <RouterProvider router={router} />
+          <Toaster
+            toastOptions={{
+              style: {
+                zIndex: 9999,
+              },
+            }}
+          />
+        </ModalProvider>
+      </TanstackProvider>
     </AuthProvider>
   );
 }

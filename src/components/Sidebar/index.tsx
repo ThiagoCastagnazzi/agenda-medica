@@ -1,5 +1,4 @@
-"use client";
-
+import { useAppointments } from "../../hooks/useAppointments";
 import Calendar from "../Calendar";
 
 import { FiWatch } from "react-icons/fi";
@@ -7,100 +6,7 @@ import { FiWatch } from "react-icons/fi";
 const MAX_NAME_LENGTH = 20;
 
 const Sidebar = () => {
-  // const { data: appointments } = useAppointments({});
-
-  const appointments = [
-    {
-      id: "1",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "10:00",
-        patient: {
-          full_name: "Fulano de Tal",
-        },
-      },
-    },
-    {
-      id: "2",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "11:00",
-        patient: {
-          full_name: "Ciclano de Tal",
-        },
-      },
-    },
-    {
-      id: "3",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "12:00",
-        patient: {
-          full_name: "Beltrano de Tal",
-        },
-      },
-    },
-    {
-      id: "4",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "13:00",
-        patient: {
-          full_name: "Fulano de Tal",
-        },
-      },
-    },
-    {
-      id: "5",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "14:00",
-        patient: {
-          full_name: "Ciclano de Tal",
-        },
-      },
-    },
-    {
-      id: "6",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "15:00",
-        patient: {
-          full_name: "Beltrano de Tal",
-        },
-      },
-    },
-    {
-      id: "7",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "16:00",
-        patient: {
-          full_name: "Fulano de Tal",
-        },
-      },
-    },
-    {
-      id: "8",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "17:00",
-        patient: {
-          full_name: "Ciclano de Tal",
-        },
-      },
-    },
-    {
-      id: "9",
-      attributes: {
-        event_date: "2022-10-10",
-        event_time: "18:00",
-        patient: {
-          full_name: "Beltrano de Tal",
-        },
-      },
-    },
-  ];
+  const { data: appointments } = useAppointments();
 
   const truncateFullName = (fullName: string) => {
     if (fullName.length > MAX_NAME_LENGTH) {
@@ -113,44 +19,21 @@ const Sidebar = () => {
 
   const appointmentsToday = appointments?.filter(
     (appointment) =>
-      appointment.attributes.event_date ===
+      appointment.event_date ===
       `${today.getFullYear()}-${(today.getMonth() + 1)
         .toString()
         .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`
   );
 
   const orderedAppointmentsToday = appointmentsToday?.sort((a, b) => {
-    if (a.attributes.event_time < b.attributes.event_time) {
+    if (a.event_time < b.event_time) {
       return -1;
     }
-    if (a.attributes.event_time > b.attributes.event_time) {
+    if (a.event_time > b.event_time) {
       return 1;
     }
     return 0;
   });
-
-  const orderedAppointmentsTodayByTime = orderedAppointmentsToday?.filter(
-    (appointment) => {
-      const timeNow = new Date();
-
-      if (
-        appointment.attributes.event_time >
-        `${
-          timeNow.getHours() < 10
-            ? `0${timeNow.getHours()}`
-            : timeNow.getHours()
-        }:${
-          timeNow.getMinutes() < 10
-            ? `0${timeNow.getMinutes()}`
-            : timeNow.getMinutes()
-        }`
-      ) {
-        return appointment;
-      }
-
-      return null;
-    }
-  );
 
   return (
     <aside
@@ -198,8 +81,8 @@ const Sidebar = () => {
           "
         >
           {appointmentsToday &&
-            orderedAppointmentsTodayByTime &&
-            orderedAppointmentsTodayByTime.map((appointment) => (
+            orderedAppointmentsToday &&
+            orderedAppointmentsToday.map((appointment) => (
               <a key={appointment.id} className="flex items-center gap-[10px]">
                 <span
                   className="
@@ -212,7 +95,7 @@ const Sidebar = () => {
                     w-[100%]
                   "
                 >
-                  {truncateFullName(appointment.attributes.patient.full_name)}
+                  {truncateFullName(appointment.patient_name)}
                 </span>
                 <span
                   className="
@@ -229,7 +112,7 @@ const Sidebar = () => {
                   text-[12px]
                   "
                   >
-                    {appointment.attributes.event_time}
+                    {appointment.event_time}
                   </span>
                 </span>
               </a>

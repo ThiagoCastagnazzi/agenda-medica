@@ -1,20 +1,28 @@
-import { Exam, ExamPOST, ExamPUT } from '@/types/Exams';
-import api from './api';
+import { collection, addDoc, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { firestore } from "../firebase/firebase";
 
-export const createExamApi = async (exam: ExamPOST[]) => {
-  const response = await api.post('/exams', exam);
-
-  return response.data;
+export const createExamFirebase = async (exam: any) => {
+  try {
+    const docRef = await addDoc(collection(firestore, "exams"), exam);
+    return docRef.id;
+  } catch (error) {
+    throw new Error("Error adding document: " + error);
+  }
 };
 
-export const updateExamApi = async (exam: ExamPUT, id: string) => {
-  const response = await api.put(`/exams/${id}`, exam);
-
-  return response.data;
+export const updateExamFirebase = async (id: string, exam: any) => {
+  try {
+    await setDoc(doc(firestore, "exams", id), exam);
+    return { id, ...exam };
+  } catch (error: any) {
+    throw new Error("Error updating patient: " + error.message);
+  }
 };
 
-export const getExamApi = async () => {
-  const response = await api.get('/exams');
-
-  return response.data as Exam[];
+export const deleteExamFirebase = async (examId: string) => {
+  try {
+    await deleteDoc(doc(firestore, "exams", examId));
+  } catch (error) {
+    throw new Error("Error adding document: " + error);
+  }
 };

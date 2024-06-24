@@ -1,22 +1,21 @@
-import { Patient } from '@/types/Patients';
-import api from './api';
+import { collection, addDoc, setDoc, doc } from "firebase/firestore";
+import { Patient } from "../types/Patients";
+import { firestore } from "../firebase/firebase";
 
-export const createPatientApi = async (patient: Patient) => {
-  const response = await api.post('/patients', patient);
-
-  return response.data;
+export const createPatientFirebase = async (patient: Patient) => {
+  try {
+    const docRef = await addDoc(collection(firestore, "patients"), patient);
+    return { id: docRef.id, ...patient };
+  } catch (error: any) {
+    throw new Error("Error adding patient: " + error.message);
+  }
 };
 
-export const updatePatientApi = async (id: string, patient: Patient) => {
-  const response = await api.put(`/patients/${id}`, patient);
-
-  return response.data;
-};
-
-export const toggleStatusPatientApi = async (id: string, status: boolean) => {
-  const response = await api.patch(`/patients/${id}/update_status`, {
-    status,
-  });
-
-  return response.data;
+export const updatePatientFirebase = async (id: string, patient: Patient) => {
+  try {
+    await setDoc(doc(firestore, "patients", id), patient);
+    return { id, ...patient };
+  } catch (error: any) {
+    throw new Error("Error updating patient: " + error.message);
+  }
 };

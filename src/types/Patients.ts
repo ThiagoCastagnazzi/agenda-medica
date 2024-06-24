@@ -2,29 +2,8 @@ export interface Patient {
   full_name: string;
   cpf: string;
   birth: string;
-  profession: string;
-  cell_phone: string;
-  rg?: string | null;
-  phone?: string | null;
-  comments?: string | null;
-  mother_name?: string | null;
-  father_name?: string | null;
-  address_attributes: {
-    id?: number;
-    zip_code?: string | null;
-    neighborhood?: string | null;
-    street?: string | null;
-    number?: string | null;
-    complement?: string | null;
-    city?: string | null;
-    state?: string | null;
-  };
-  responsible_attributes: {
-    id?: number;
-    full_name?: string | null;
-    cpf?: string | null;
-    birth_date?: string | null;
-  };
+  rg: string;
+  phone: string;
 }
 
 export interface PatientsResponse {

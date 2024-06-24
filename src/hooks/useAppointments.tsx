@@ -1,27 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
-import api from "../services/api";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { firestore } from "../firebase/firebase";
 
 export function useAppointments() {
   return useQuery({
     queryKey: ["appointments"],
     queryFn: async () => {
-      const res = await api.get(`/appointments`);
-
-      return res.data.data;
+      const query = await getDocs(collection(firestore, "appointments"));
+      const appointments = [] as any[];
+      query.forEach((doc) => {
+        appointments.push({ id: doc.id, ...doc.data() });
+      });
+      return appointments;
     },
     staleTime: 1000 * 60 * 10, // 10 minutes
   });
 }
 
 const fetchAppointment = async (id: string) => {
-  const res = await api.get(`/appointments/${id}`);
-
-  return res.data.data;
+  try {
+    const query = doc(firestore, "appointments", id);
+    const appointments = await getDoc(query);
+    if (appointments.exists()) {
+      return { id: appointments.id, ...appointments.data() };
+    } else {
+      throw new Error("Appointment not found");
+    }
+  } catch (error: any) {
+    throw new Error("Error fetching appointment: " + error?.message);
+  }
 };
 
-export const useAppointment = (patient_id: string) => {
+export const useAppointment = (id: string) => {
   return useQuery({
-    queryKey: ["appointment", patient_id],
-    queryFn: () => fetchAppointment(patient_id),
+    queryKey: ["appointment", id],
+    queryFn: () => fetchAppointment(id),
+    enabled: !!id,
   });
 };
