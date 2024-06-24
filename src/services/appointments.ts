@@ -1,10 +1,7 @@
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
-import { Appointment } from "../types/Appointments";
 
-export const createAppointmentFirebase = async (
-  appointmentData: Appointment
-) => {
+export const createAppointmentFirebase = async (appointmentData: any) => {
   try {
     const docRef = await addDoc(
       collection(firestore, "appointments"),
