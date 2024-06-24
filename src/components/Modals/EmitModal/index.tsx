@@ -70,7 +70,7 @@ const EmitModal = ({
 
       if (!isEditing) {
         const newExam = {
-          ...editExam,
+          ...exam,
           created_at: new Date().toISOString().split("T")[0],
         };
         const response = await createExamFirebase(newExam);

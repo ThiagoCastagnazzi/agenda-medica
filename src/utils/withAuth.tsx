@@ -14,14 +14,11 @@ const withAuth = (Component: React.ComponentType) => {
       return () => unsubscribe();
     }, []);
 
-    console.log("authenticated", authenticated);
-
     if (loading) {
       return <p>Loading...</p>;
     }
 
     if (!authenticated) {
-      console.log("Usuário não autenticado");
       window.location.href = "/login";
     }
 

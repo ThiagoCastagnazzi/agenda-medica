@@ -4,13 +4,22 @@ import AppointmentLoader from "../../SkeletonLoaders/AppointmentLoader";
 import { useModal } from "../../../context/ModalContext";
 import Header from "../../Header";
 import ExamsHistoric from "./ExamsHistoric";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface PatientProps {
   id: string;
 }
 
 const Patient = ({ id }: PatientProps) => {
+  const navigate = useNavigate();
   const { data: patient, isLoading: isLoadingPatient } = usePatient(id);
+
+  useEffect(() => {
+    if (!isLoadingPatient && !patient) {
+      navigate("/pacientes");
+    }
+  }, [patient, isLoadingPatient, navigate]);
 
   const { openModal, setOptionId, setPatientId, setAppointmentId } = useModal();
 

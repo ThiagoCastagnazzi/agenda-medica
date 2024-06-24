@@ -4,7 +4,7 @@ import { firestore } from "../firebase/firebase";
 export const createExamFirebase = async (exam: any) => {
   try {
     const docRef = await addDoc(collection(firestore, "exams"), exam);
-    return docRef.id;
+    return { id: docRef.id, ...exam };
   } catch (error) {
     throw new Error("Error adding document: " + error);
   }

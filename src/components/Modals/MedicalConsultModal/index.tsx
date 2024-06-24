@@ -82,8 +82,10 @@ export default function MedicalConsultModal({
   };
 
   const verifyIfWeekend = (date: Date) => {
-    const day = date.getDay() + 1;
-    return day === 6 || day === 7;
+    if (date.getDay() === 0 || date.getDay() === 6) {
+      return true;
+    }
+    return false;
   };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -101,7 +103,27 @@ export default function MedicalConsultModal({
       return;
     }
 
-    const appointmentDate = new Date(data.date);
+    const today = new Date();
+
+    const appointmentDay = data.date.split("-")[2];
+    const appointmentMonth = data.date.split("-")[1];
+    const appointmentYear = data.date.split("-")[0];
+    const appointmentHour = data.time.split(":")[0];
+    const appointmentMinute = data.time.split(":")[1];
+
+    const appointmentDate = new Date(
+      parseInt(appointmentYear),
+      parseInt(appointmentMonth) - 1,
+      parseInt(appointmentDay),
+      parseInt(appointmentHour),
+      parseInt(appointmentMinute)
+    );
+
+    if (appointmentDate < today) {
+      toast.error("Não é possível agendar consultas em datas retroativas!");
+      setLoading(false);
+      return;
+    }
 
     if (verifyIfWeekend(appointmentDate)) {
       toast.error("Não é possível agendar consultas aos sábados ou domingos!");

@@ -44,10 +44,6 @@ const Account = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
   return (
     <div
       ref={dropdownRef}

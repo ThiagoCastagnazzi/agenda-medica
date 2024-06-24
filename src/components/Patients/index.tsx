@@ -35,9 +35,12 @@ const Patients = () => {
 
   const handleLastPatientAppointment = (id: string) => {
     if (appointments) {
-      const lastAppointment = appointments?.find(
+      const lastAppointment = appointments?.filter(
         (appointment) => appointment.patient_id == id
-      );
+      )[
+        appointments?.filter((appointment) => appointment.patient_id == id)
+          .length - 1
+      ];
 
       return lastAppointment;
     }
