@@ -13,7 +13,6 @@ export function useAppointments() {
       });
       return appointments;
     },
-    staleTime: 1000 * 60 * 10, // 10 minutes
   });
 }
 
