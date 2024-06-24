@@ -30,6 +30,9 @@ export default function LoginC() {
       toast.success("Login efetuado com sucesso!");
 
       window.location.href = "/";
+    } else {
+      toast.error("E-mail ou senha inválidos!");
+      setLoading(false);
     }
   };
 
